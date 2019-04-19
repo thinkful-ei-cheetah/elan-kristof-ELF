@@ -26,7 +26,7 @@ class App extends Component {
       <div className="App">
       <NavBar />
         <main>
-          <TechSpecs  unselected={this.state.unselected} selected={this.state.selected} updateFeature={this.updateFeature}/>
+          <TechSpecs  unselected={this.state.unselected} selected={this.state.selected} updateFeature={this.updateFeature.bind(this)}/>
           <Summary selected={this.state.selected}/>
         </main>
       </div>
