@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
+import NavBar from './components/NavBar';
+import TechSpecs from './components/TechSpecs';
+import Summary from './components/Summary';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      selected: {
-        Processor: {
-            name: '17th Generation Intel Core HB (7 Core with donut spare)',
-            cost: 700
-          },
-        "Operating System": {
-            name: 'Ubuntu Linux 16.04',
-            cost: 200
-          },
-        "Video Card":{
-            name: 'Toyota Corolla 1.5v',
-            cost: 1150.98
-          },
-        Display: {
-            name: '15.6" UHD (3840 x 2160) 60Hz Bright Lights and Knobs',
-            cost: 1500
-          }
-      }
-    }
+  state = {
+     selected: {},
+     unseleceted: {}
+  }
+
+  componentDidMount() {
+    console.log(this.props.features.selected)
+    this.setState({
+      selected: this.props.features.selected,
+      unselected: this.props.features.unselected
+    });
   }
 
   updateFeature(feature, newValue) {
@@ -48,10 +40,10 @@ class App extends Component {
     const total = Object.keys(this.state.selected)
           .reduce((acc, curr) => acc + this.state.selected[curr].cost, 0);    
 
-
-    const features = Object.keys(this.props.features)
+    console.log(this.state)
+    const features = Object.keys(this.state.unselected)
           .map(key => {
-            const options = this.props.features[key].map((item, index) => {
+            const options = this.state.unselected[key].map((item, index) => {
               const selectedClass = item.name === this.state.selected[key].name ? 'feature__selected' : '';
               const featureClass = 'feature__option ' + selectedClass;
               return <li key={index} className="feature__item">
@@ -75,27 +67,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
-          <h1>ELF Computing</h1>
-          <h3>Laptops</h3>
-          <h5>Customize your laptop</h5>  
-        </header>      
+      <NavBar />
         <main>
-          <section className="main__form">
-            <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
-            { features }
-          </section>
-          <section className="main__summary">
-            <h3>NEW GREENLEAF 2018</h3>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Your Price: </div>
-              <div className="summary__total__value">
-              { new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                  .format(total) }
-              </div>
-            </div>
-          </section>
+          <TechSpecs features={features} />
+          <Summary total={total} summary={summary}/>
         </main>
       </div>
     );
