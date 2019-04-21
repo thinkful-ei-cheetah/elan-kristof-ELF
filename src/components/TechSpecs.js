@@ -32,6 +32,7 @@ export class TechSpecs extends Component {
         <section className="main__form">
             <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
               { features }
+              {console.log(features)}
           </section>
       </div>
     )
