@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Feature from './Features'
 
 export class TechSpecs extends Component {
   render() {
@@ -19,20 +20,14 @@ export class TechSpecs extends Component {
               </li>
             });
 
-            return <div className="feature" key={key}>
-              <div className="feature__name">{key}</div>
-              <ul className="feature__list">
-                { options }
-              </ul>
-            </div>
-          });      
+            return <Feature key={key} product ={key} options = {options} />          });      
 
     return (
       <div>
         <section className="main__form">
             <h3>TECH SPECS AND CUSTOMIZATIONS</h3>
               { features }
-              {console.log(features)}
+              
           </section>
       </div>
     )
