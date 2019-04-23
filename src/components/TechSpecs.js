@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Feature from './Features'
+import Specs from './Specs'
 
 export class TechSpecs extends Component {
   render() {
@@ -9,18 +10,20 @@ export class TechSpecs extends Component {
             const options = this.props.unselected[key].map((item, index) => {
               const selectedClass = item.name === this.props.selected[key].name ? 'feature__selected' : '';
               const featureClass = 'feature__option ' + selectedClass;
-              return <li key={index} className="feature__item">
-                <div className={featureClass}
-                  
-                  onClick={() => this.props.updateFeature(key, item)}>
-                    { item.name }
-                    ({ new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD'})
-                      .format(item.cost) })
-                </div>
-              </li>
-            });
+              return <Specs 
+                        key={index} 
+                        updateFeature={this.props.updateFeature} 
+                        name={item.name} 
+                        cost={item.cost} 
+                        featureClass={featureClass} 
+                        key2={key}
+                        item={item}
+              />});
 
-            return <Feature key={key} product ={key} options = {options} />          });      
+            return <Feature 
+                      key={key} 
+                      product ={key} 
+                      options = {options} />});      
 
     return (
       <div>
